@@ -35,10 +35,11 @@ struct custom
 };
 
 void solve(){
-	int n, d, l; cin >> n >> d >> l;
-	vector<int> odd((n+1)/2);
-	
-
+	long long int c[3], s = 0;
+	for (int i = 0; i < 3; ++i)	cin >> c[i];
+	sort(c, c + 3, std::greater<int>());
+    s = accumulate(c, c + 3, s);
+	cout << min(s/3 , s - c[0]) << endl;
 
 }	
 
