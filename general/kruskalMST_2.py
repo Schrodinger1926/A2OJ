@@ -24,17 +24,24 @@ Adj = [[] for _ in range(N)]
 edges = {}
 # construct graph
 for _ in range(M):
-	u, v, w  = map(int, raw_input().split())
+	_in = [int(i) for i in raw_input().split()]
+	try:
+		u, v, r  = map(int, _in)
+
+	except Exception, e:
+		u, v, r, w = map(int, _in)
+	
 	u -= 1
 	v -= 1
-	try:
-		edges[w].append((u,v))
-	except Exception, e:
-		edges[w] = [(u,v)]
+	if r == 0:
+		try:
+			edges[w].append((u,v))
+		except Exception, e:
+			edges[w] = [(u,v)]
 
 # starting point. useless, such a waste of variable name
-s = input() 
 tot = 0
+s = input() 
 weights = edges.keys()
 weights.sort() 		# In-place sorting
 rank = [1 for _ in range(N)]
@@ -48,3 +55,4 @@ for w in weights:
 			union(u, v)
 			tot += w
 print tot
+
