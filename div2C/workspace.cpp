@@ -1,3 +1,4 @@
+// Need to figure this question yet
 #include <algorithm>
 #include <cassert>
 #include <climits>
@@ -18,7 +19,7 @@
 #include <unordered_map>
 #include <vector>
 using namespace std;
-
+#define mo 1000000007
 // My templates
 struct reverse
 {
@@ -35,11 +36,16 @@ struct custom
 };
 
 void solve(){
-	long long int c[3], s = 0;
-	for (int i = 0; i < 3; ++i)	cin >> c[i];
-	sort(c, c + 3, std::greater<int>());
-    s = accumulate(c, c + 3, s);
-	cout << min(s/3 , s - c[0]) << endl;
+	int n,k,d,f[311][311],ans;
+	cin >> n >> k >> d;
+	f[0][0]=1;
+	for(int i=0;i<n;i++)
+		for(int j=0;j<=k;j++)
+			for(int l=1;l<=k;l++)
+				f[i+l][max(j,l)]=(f[i+l][max(j,l)]+f[i][j])%mo;
+	for(int i=d;i<=k;i++)
+		ans=(ans+f[n][i])%mo;
+	cout << ans << endl;
 
 }	
 
